@@ -1,8 +1,10 @@
 import React from "react";
-import logo from "./logo.svg";
+import { BrowserRouter, Switch, Route, Link} from "react-router-dom";
+import createBrowserHistory from "history/createBrowserHistory";
 import "./App.css";
 import { string } from "prop-types";
 import Keeps from "./Keeps";
+import Login from "./Login";
 interface AppProps {}
 interface AppState {
   value: string;
@@ -53,20 +55,37 @@ class App extends React.Component<AppProps, AppState> {
     });
   };
 
+  register = () => {
+    
+  }
+
+  login = () => {
+    
+  }
+
   render() {
-    console.log(this.state.value);
+    console.log(this.state.value)
     const keepsElement = this.state.arrKeeps.map(val => (
       <Keeps title={val.title} />
     ));
+    //const login = <Login login={this.login} />
     return (
-      <div>
-        <input
-          onChange={this.handleChange}
-          value={this.state.value}
-          placeholder="Заметка..."
-        />
-        <button onClick={this.addKeep}>Keep</button>
+      <div className='container'>
+        <div className='footer'>
+          <input
+            className='footer_input'
+            onChange={this.handleChange}
+            value={this.state.value}
+            placeholder="Заметка..."
+          />
+          
+          <button className='footer_button' onClick={this.addKeep}>Keep</button>
+          <Link to='/registr'><button className='footer_registr'>registr</button></Link>
+          <Link to='/login'><button className='footer_registr'>Login</button></Link>
+        </div>
+        <div className='container_keeps'>
         {keepsElement}
+        </div>
       </div>
     );
   }
